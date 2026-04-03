@@ -1,0 +1,9 @@
+//Search login attempt to outdated BAV2ROPC SMTP
+//In UserPrincipalName put your mail to account
+
+SigninLogs
+| where UserPrincipalName == ""
+| extend authDetails = parse_json(AuthenticationDetails)
+| where authDetails[0].succeeded == true
+    and authDetails[0].authenticationMethod == "Password"
+    and UserAgent == "BAV2ROPC"
