@@ -1,0 +1,10 @@
+SigninLogs
+| where ResultType != 0
+| summarize Counter = count()
+    by ResultType, ResultDescription, UserDisplayName
+| project
+    ResultDescription,
+    ResultType,
+    UserDisplayName,
+    Counter
+| order by Counter desc
